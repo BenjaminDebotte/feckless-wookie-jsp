@@ -7,7 +7,6 @@
 <%@page import="java.util.List"%>
 <%@page import="model.Client"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="fr.ensicaen.si.jsp.db.MysqlDbManagement"%>
 <%@page import="db.DbManagement"%>
 <%@page import="dao.DbClientDao"%>
 <%@page import="dao.ClientDao"%>
@@ -71,22 +70,18 @@
 				
 				
 				if(lastName.isEmpty() && firstName.isEmpty()){
-					clients = ClientDao.getInstance().getClients();
 					out.print("<h1>Liste des clients : </h1>");
 
 				}
 				else if(firstName.isEmpty()){
-					clients = ClientDao.getInstance().getByName(lastName);
 					out.print("<h1>Recherche pour \"" + lastName + "\" : </h1>");
 
 				}
 				else{
-					clients = ClientDao.getInstance().getByFullname(lastName, firstName);
 					out.print("<h1>Recherche pour \"" + firstName + " " + lastName + "\" : </h1>\n");
-
 				}
 
-				
+				clients = SiBean.getClientList(lastName, firstName);
 				
 				out.print("<div class=\"list-group\">\n");
 
